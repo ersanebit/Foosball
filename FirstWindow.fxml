@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="348.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button fx:id="plTab" layoutX="117.0" layoutY="108.0" mnemonicParsing="false" onAction="#goToPlayersTab" prefHeight="78.0" prefWidth="147.0" text="Go to player`s tab" />
+      <Button fx:id="matchTab" layoutX="323.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToMatchTab" prefHeight="77.0" prefWidth="157.0" text="Go to match`s tab" />
+      <Button fx:id="teamTab" layoutX="522.0" layoutY="108.0" mnemonicParsing="false" onAction="#goToTeamTab" prefHeight="87.0" prefWidth="169.0" text="Go to team`s tab" />
+      <Label layoutX="180.0" layoutY="28.0" text="Welcome to the foosball system! Please select an option below!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
