@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-    <Button fx:id="editPlayer" layoutX="520.0" layoutY="682.0" mnemonicParsing="false" onAction="#updatePlayer" prefHeight="29.0" prefWidth="88.0" text="Edit">
+    <Button fx:id="editPlayer" layoutX="520.0" layoutY="682.0" mnemonicParsing="false" onAction="#updatePlayerr" prefHeight="29.0" prefWidth="88.0" text="Edit">
          <font>
             <Font size="13.0" />
          </font>
@@ -28,7 +28,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="deletePlayer" layoutX="647.0" layoutY="682.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="29.0" prefWidth="108.0" text="Delete">
+      <Button layoutX="647.0" layoutY="682.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="29.0" prefWidth="108.0" text="Delete">
          <font>
             <Font size="13.0" />
          </font>
@@ -59,5 +59,6 @@
       </Button>
       <Label layoutX="41.0" layoutY="94.0" prefHeight="39.0" prefWidth="60.0" text="Id" />
       <TextField fx:id="idTextField" layoutX="161.0" layoutY="101.0" onAction="#addPlayer" prefHeight="25.0" prefWidth="181.0" />
+      <Button layoutX="110.0" layoutY="363.0" mnemonicParsing="false" onAction="#savePlayer" prefHeight="29.0" prefWidth="80.0" text="Save" />
    </children>
 </AnchorPane>

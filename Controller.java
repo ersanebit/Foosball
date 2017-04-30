@@ -82,7 +82,7 @@ public class Controller{
     @FXML
     private TableColumn<Integer, Player> rank;
     @FXML
-    private TableView plTable;
+    private TableView<Player> plTable;
     @FXML
     private TextField idTextField;
     @FXML
@@ -115,7 +115,7 @@ public class Controller{
 
 
     @FXML
-    private TableView matchTable;
+    private TableView<Match> matchTable;
 
     @FXML
     private TableColumn<String, Team> team1Column;
@@ -129,7 +129,7 @@ public class Controller{
 
     //team table
      @FXML
-     private TableView teamTable;
+     private TableView<Team> teamTable;
      @FXML
      private TableColumn teamNameColumn;
      @FXML
@@ -261,39 +261,50 @@ public class Controller{
 
         Stage stage;
         Parent root;
-        if(event.getSource()==editPlayer){
+        if (event.getSource() == editPlayer) {
             //get reference to the button's stage
-            stage=(Stage) editPlayer.getScene().getWindow();
+            stage = (Stage) editPlayer.getScene().getWindow();
             //load up OTHER FXML document
             root = FXMLLoader.load(getClass().getResource("editPlayer.fxml"));
-        }
-        else{
-            stage=(Stage) goBack.getScene().getWindow();
+        } else {
+            stage = (Stage) goBack.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Foosball.fxml"));
         }
         //create a new scene with root and set the stage
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
 
-        ObservableList<Player> plData = FXCollections.observableArrayList();
 
-        String name = editNameTextField.getText();
-        String dateofbirth = dateEditTextField.getText();
-        String email = emailEditTextField.getText();
-        int rank = Integer.parseInt(rankEditTextField.getText());
+    @FXML
+    public void updatePlayerr(javafx.event.ActionEvent event) throws Exception {
 
-        plTable.getSelectionModel().getSelectedItem().toString();
 
+        Player player = plTable.getSelectionModel().getSelectedItem();
+        idTextField.setText(String.valueOf(player.getId()));
+        nameTextField.setText(player.getName());
+        dateofbirthTextField.setText(player.getDateofbirth());
+        emailTextField.setText(player.getEmail());
+        rankTextField.setText(String.valueOf(player.getRank()));
+
+    }
+
+      @FXML
+    public void savePlayer(javafx.event.ActionEvent event) throws Exception{
+
+    Player player = plTable.getSelectionModel().getSelectedItem();
+    int x = player.getId();
 
         try {
+
             Connection con = DBConnection.getConnection();
             Statement myStmt = con.createStatement();
-            myStmt.executeUpdate("UPDATE `Players` SET `Name` = '"+name+"', " +
-                    "`Date of birth` = '"+dateofbirth+"', " +
-                    "`E-mail` = '"+email+"', " +
-                    "`Rank` = '"+rank+"'" +
-                    " WHERE Id = ? ");
+            myStmt.executeUpdate("UPDATE `Players` SET `Name` = '"+nameTextField.getText()+"', " +
+                    "`Date of birth` = '"+dateofbirthTextField.getText()+"', " +
+                    "`E-mail` = '"+emailTextField.getText()+"', " +
+                    "`Rank` = '"+rankTextField.getText()+"'" +
+                    " WHERE Id = '"+x+"' ");
 
             con.close();
             myStmt.close();
@@ -301,7 +312,7 @@ public class Controller{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Congratulations!");
             alert.setHeaderText("You have just edited a player!" +
-                    "\n You can push the \"Read\" button to see the updated list!");
+                    "\n Click the \"Read\" button again to see the updated list!");
             alert.showAndWait();
 
 
@@ -327,10 +338,6 @@ public class Controller{
         dateofbirth.setCellValueFactory(new PropertyValueFactory<>("dateofbirth"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         rank.setCellValueFactory(new PropertyValueFactory<>("rank"));
-
-
-
-
 
 
         try {
@@ -364,7 +371,31 @@ public class Controller{
     @FXML
     public void deletePlayer(javafx.event.ActionEvent event) throws Exception {
 
-        System.out.println("delete some players");
+        try {
+            Player player = plTable.getSelectionModel().getSelectedItem();
+            Connection con = DBConnection.getConnection();
+            Statement myStmt = con.createStatement();
+            myStmt.executeUpdate("DELETE FROM `Players` WHERE `Name` = '"+player+"', " +
+                    "`Date of birth` = '"+player+"', " +
+                    "`E-mail` = '"+player+"', " +
+                    "`Rank` = '"+player+"'," +
+                    " 'Id' = '"+player+"' ");
+
+            con.close();
+            myStmt.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations!");
+            alert.setHeaderText("You have just deleted a player!" +
+                    "\n Click the \"Read\" button again to see the updated list!");
+            alert.showAndWait();
+
+
+
+
+        }catch (Exception exc){
+            exc.printStackTrace();
+        }
     }
 
 
@@ -393,7 +424,7 @@ public class Controller{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Congratulations!");
             alert.setHeaderText("You have just created a new player!" +
-                    "\n You can push the \"Read\" button to see the updated list!");
+                    "\n You can push the \"Read\" button again to see the updated list!");
             alert.showAndWait();
 
 
@@ -412,7 +443,7 @@ public class Controller{
 
         Stage stage;
         Parent root;
-        if(event.getSource()==editMatch1){
+        if(event.getSource()==editMatch){
             //get reference to the button's stage
             stage=(Stage) editMatch1.getScene().getWindow();
             //load up OTHER FXML document
@@ -428,11 +459,79 @@ public class Controller{
         stage.show();
         }
 
+        @FXML
+        public void updateMatch(javafx.event.ActionEvent event) throws Exception {
+
+
+            Match match =  matchTable.getSelectionModel().getSelectedItem();
+            team1TextField.setText(match.getTeam1());
+            team2TextField.setText(match.getTeam2());
+            scoreTextField.setText(match.getScore());
+            matchDatePicker.setEditable(Boolean.parseBoolean(match.getDate()));
+        }
+
+    @FXML
+    public void saveMatch(javafx.event.ActionEvent event) throws Exception{
+
+        Match match =  matchTable.getSelectionModel().getSelectedItem();
+        String y = match.getScore();
+
+        try {
+
+
+            Connection con = DBConnection.getConnection();
+            Statement myStmt = con.createStatement();
+            myStmt.executeUpdate("UPDATE `Matches` SET `Team 1` = '"+team1TextField.getText()+"', "+
+                    "`Team 2` = '"+team2TextField.getText()+"', " +
+                    "`Date` = '"+matchDatePicker.getPromptText()+"' " +
+                    " WHERE Score = '"+y+"' ");
+
+            con.close();
+            myStmt.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations!");
+            alert.setHeaderText("You have just edited a match!" +
+                    "\n Click the \"Read\" button again to see the updated list!");
+            alert.showAndWait();
+
+        }catch (Exception exc){
+            exc.printStackTrace();
+        }
+
+
+    }
+
 
     @FXML
     public void deleteMatch(javafx.event.ActionEvent event) throws Exception {
 
-        System.out.println("Match deleted");
+        Match match = matchTable.getSelectionModel().getSelectedItem();
+
+        String y = match.getScore();
+        try {
+
+
+            Connection con = DBConnection.getConnection();
+            Statement myStmt = con.createStatement();
+            myStmt.executeUpdate("DELETE FROM `Matches` WHERE `Team 1` = '"+team1TextField.getText()+"', " +
+                    "`Team 2` = '"+team2TextField.getText()+"', " +
+                    "`Date` = '"+matchDatePicker.getEditor()+"', " +
+                    " 'Score' = '"+y+"' ");
+
+            con.close();
+            myStmt.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations!");
+            alert.setHeaderText("You have just deleted a match!" +
+                    "\n Click the \"Read\" button again to see the updated list!");
+            alert.showAndWait();
+
+        }catch (Exception exc){
+            exc.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -520,22 +619,40 @@ public class Controller{
     @FXML
     public void editTeam(javafx.event.ActionEvent event) throws Exception {
 
-        Stage stage;
-        Parent root;
-        if(event.getSource()==editTeamButton){
-            //get reference to the button's stage
-            stage=(Stage) editTeamButton.getScene().getWindow();
-            //load up OTHER FXML document
-            root = FXMLLoader.load(getClass().getResource("editTeam.fxml"));
+            Team team = teamTable.getSelectionModel().getSelectedItem();
+            player1TextField.setText(team.getPlayer1());
+            player2TextField.setText(team.getPlayer2());
+            teamNameTextField.setText(team.getTeamName());
+
+    }
+
+    @FXML
+    public void saveTeam(javafx.event.ActionEvent event) throws Exception {
+
+        Team team = teamTable.getSelectionModel().getSelectedItem();
+
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+            Statement myStmt = con.createStatement();
+            myStmt.executeUpdate("UPDATE `Teams` SET `Name` = '"+teamNameTextField.getText()+"', `Player 1` = '"+player1TextField.getText()+"' WHERE Player 2 = '"+player2TextField.getText()+"'' ");
+
+            con.close();
+            myStmt.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations!");
+            alert.setHeaderText("You have just edited a team!" +
+                    "\n Click the \"Read\" button again to see the updated list!");
+            alert.showAndWait();
+
+
+
+
+        }catch (Exception exc){
+            exc.printStackTrace();
         }
-        else{
-            stage=(Stage) goBack.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("TeamTab.fxml"));
-        }
-        //create a new scene with root and set the stage
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
@@ -555,12 +672,7 @@ public class Controller{
         player2Column.setCellValueFactory(new PropertyValueFactory<>("player2"));
 
 
-
-
-
-
-
-            try {
+           try {
                 Connection con = DBConnection.getConnection();
                 Statement myStmt = con.createStatement();
                 ResultSet myRs = myStmt.executeQuery("select * from Teams");
@@ -584,7 +696,9 @@ public class Controller{
 
 
         };
-    }
+
+
+}
 
 
 

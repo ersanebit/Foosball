@@ -18,8 +18,8 @@
       <Text layoutX="100.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" />
       <TextField fx:id="team1TextField" layoutX="181.0" layoutY="141.0" onAction="#addMatch" />
       <TextField fx:id="team2TextField" layoutX="181.0" layoutY="178.0" onAction="#addMatch" />
-      <Button fx:id="editMatch1" layoutX="660.0" layoutY="637.0" mnemonicParsing="false" onAction="#editMatch" text="Edit" />
-      <Button fx:id="deleteMatch" layoutX="724.0" layoutY="637.0" mnemonicParsing="false" onAction="#deleteMatch" text="Delete" />
+      <Button fx:id="editMatch1" layoutX="660.0" layoutY="637.0" mnemonicParsing="false" onAction="#updateMatch" text="Edit" />
+      <Button layoutX="724.0" layoutY="637.0" mnemonicParsing="false" onAction="#deleteMatch" text="Delete" />
       <Button fx:id="readMatches" layoutX="805.0" layoutY="637.0" mnemonicParsing="false" onAction="#readAllMatches" text="Read" />
       <Button fx:id="addMatch" layoutX="284.0" layoutY="349.0" mnemonicParsing="false" onAction="#addMatch" text="Add" />
       <Button fx:id="tournamentButton" layoutX="340.0" layoutY="715.0" mnemonicParsing="false" onAction="#tournamentMethod" prefHeight="25.0" prefWidth="297.0" text="Tournament" />
@@ -39,5 +39,6 @@
       </Label>
       <Button fx:id="goBack" layoutX="86.0" layoutY="669.0" mnemonicParsing="false" onAction="#goToMatchTab" text="Go back" />
       <DatePicker fx:id="matchDatePicker" layoutX="181.0" layoutY="213.0" />
+      <Button layoutX="208.0" layoutY="349.0" mnemonicParsing="false" onAction="#saveMatch" text="Save" />
    </children>
 </AnchorPane>

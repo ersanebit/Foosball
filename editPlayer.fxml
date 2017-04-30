@@ -8,16 +8,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button fx:id="goBack" layoutX="74.0" layoutY="332.0" mnemonicParsing="false" onAction="#goToEditScene" text="Back" />
-      <TextField fx:id="editNameTextField" layoutX="140.0" layoutY="84.0" onAction="#updatePlayer" />
-      <TextField fx:id="dateEditTextField" layoutX="140.0" layoutY="135.0" onAction="#updatePlayer" />
-      <TextField fx:id="emailEditTextField" layoutX="140.0" layoutY="175.0" onAction="#updatePlayer" />
-      <TextField fx:id="rankEditTextField" layoutX="140.0" layoutY="220.0" onAction="#updatePlayer" />
+      <Button fx:id="goBack" layoutX="74.0" layoutY="332.0" mnemonicParsing="false" onAction="#updatePlayer" text="Back" />
+      <TextField fx:id="editNameTextField" layoutX="140.0" layoutY="84.0" onAction="#updatePlayerr" />
+      <TextField fx:id="dateEditTextField" layoutX="140.0" layoutY="135.0" onAction="#updatePlayerr" />
+      <TextField fx:id="emailEditTextField" layoutX="140.0" layoutY="175.0" onAction="#updatePlayerr" />
+      <TextField fx:id="rankEditTextField" layoutX="140.0" layoutY="220.0" onAction="#updatePlayerr" />
       <Label layoutX="66.0" layoutY="88.0" text="Name" />
       <Label layoutX="46.0" layoutY="139.0" text="Date of birth" />
       <Label layoutX="66.0" layoutY="175.0" text="E-mail" />
       <Label layoutX="66.0" layoutY="224.0" text="Rank" />
-      <Button layoutX="245.0" layoutY="280.0" mnemonicParsing="false" onAction="#updatePlayer" text="Update" />
+      <Button layoutX="245.0" layoutY="280.0" mnemonicParsing="false" onAction="#updatePlayerr" text="Update" />
       <Label layoutX="232.0" layoutY="33.0" text="Edit the player">
          <font>
             <Font size="18.0" />

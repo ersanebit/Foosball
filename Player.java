@@ -28,7 +28,7 @@ public class Player {
 
 
 
-    public Integer getId(){
+    public int getId(){
             return id;
         }
 
@@ -52,7 +52,7 @@ public class Player {
 
 
 
-        public Integer getRank() {
+        public int getRank() {
             return rank;
         }
 
